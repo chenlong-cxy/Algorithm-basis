@@ -2,7 +2,6 @@
 #include <vector>
 using namespace std;
 
-
 /**
 * Definition for binary tree
 * struct TreeNode {
