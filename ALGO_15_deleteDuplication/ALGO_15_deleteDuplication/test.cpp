@@ -14,24 +14,27 @@ public:
 		if (pHead == nullptr || pHead->next == nullptr) //链表为空或只有一个结点无需进行操作
 			return pHead;
 		ListNode* head = new ListNode(0); //创建头结点（便于操作）
-		head->next = pHead;
+		head->next = pHead; //头结点与原链表建立关系
 		ListNode* prev = head;
 		ListNode* last = prev->next;
 		while (last)
 		{
+			//未发现重复的结点，prev和last一同后移
 			while (last->next&&last->val != last->next->val)
 			{
 				prev = prev->next;
 				last = last->next;
 			}
+			//发现重复的结点，last独自后移
 			while (last->next&&last->val == last->next->val)
 			{
 				last = last->next;
 			}
-			//无需删除的，last->next == nullptr
-			//有需删除的，last->next == nullptr
-			//有需删除的，last->val != last->next->val
-			if (prev->next != last)
+			//到达此处有三种情况：
+			//1、没有需要删除的重复结点，是因为last->next == nullptr到此
+			//2、有需要删除的重复结点，是因为last->next == nullptr到此（链表后半段都需要删除）
+			//3、有需要删除的重复结点，是因为last->val != last->next->val到此（链表中间某段需要删除）
+			if (prev->next != last) //说明有需要删除的重复结点
 			{
 				prev->next = last->next;
 			}
